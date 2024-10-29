@@ -1,9 +1,6 @@
 ---
 # tasks file for thermo-core
 
----
-# tasks file for ThermoCore
-
 # Initialize system and environment
 - name: Start ThermoCore diagnostics
   ansible.builtin.debug:
