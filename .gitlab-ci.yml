@@ -1,0 +1,35 @@
+# .gitlab-ci.yml
+stages:
+  - generate_docs
+
+variables:
+  # Define paths to simplify the CI script
+  VENV_PATH: "/home/gitlab/venv"
+
+generate_docs:
+  stage: generate_docs
+  script:
+    # Ensure Python and pip are installed, and create a virtual environment
+    - sudo apt update && sudo apt install -y python3 python3-pip
+    - python3 -m venv $VENV_PATH
+    - source $VENV_PATH/bin/activate
+    - pip install git+https://github.com/docsible/docsible.git
+
+    # Generate documentation
+    - docsible -r ./ -g -o README.md -com -nob
+
+    # Check for any changes in the generated documentation
+    - git config user.name "gitlab-ci"
+    - git config user.email "gitlab-ci@mydomain.com"
+    - git add README.md
+    - if git diff --cached --exit-code; then
+        echo "No changes to commit";
+        exit 0;
+      fi
+
+    # Commit and push if there are changes
+    - echo "Git Remote URL - http://${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+    - git commit -m "Automated documentation update by GitLab CI"
+    - git push "http://${DEPLOY_TOKEN_USER}:${DEPLOY_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" HEAD:main
+  only:
+    - main # Run this job only on pushes to the main branch
