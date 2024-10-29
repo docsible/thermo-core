@@ -28,7 +28,7 @@ jobs:
 
       - name: Generate documentation for role
         run: |
-          docsible -r ./ -g -o README.md -a -com
+          docsible -r ./ -g -o README.md -com
 
       - name: Check for documentation changes
         run: |
