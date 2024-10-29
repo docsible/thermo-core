@@ -1,0 +1,65 @@
+---
+# defaults file for thermo-core
+
+# title: Minimum temperature required for energy generation (in °K)
+# required: True
+# description: The minimum core temperature required to initiate the energy synthesis process.
+min_temperature_threshold: 3000
+
+# title: Target pressure for optimal energy generation (in Pa)
+# required: True
+# description: Optimal pressure setting for ThermoCore to maximize energy output under safe conditions.
+optimal_pressure_threshold: 4500
+
+# title: Maximum cooldown rate allowable (°C/min)
+# required: True
+# description: The rate at which ThermoCore can cool down without causing structural strain.
+max_cooldown_rate: 50
+
+# title: Default coolant level threshold (percentage)
+# required: True
+# description-lines:
+# This variable sets the minimum allowable coolant level for ThermoCore to function.
+# If coolant levels fall below this threshold, ThermoCore will initiate emergency coolant refill protocols.
+# This prevents overheating and maintains safe operational conditions.
+coolant_level_threshold: 30
+
+# title: Safety margin for containment pressure (in Pa)
+# required: True
+# description: Buffer pressure level in containment to maintain system stability in fluctuating environments.
+pressure_safety_margin: 200
+
+# title: Optimal energy storage capacity (in MW)
+# required: False
+# description: Maximum energy storage capacity of ThermoCore in megawatts. Exceeding this may result in overflow.
+max_energy_storage: 500
+
+# title: External temperature check frequency (in seconds)
+# required: False
+# description: Frequency at which external temperature is checked to adjust ThermoCore energy generation.
+external_temp_check_interval: 60
+
+# title: Maximum energy output for safe operation (in MW)
+# required: True
+# description: Sets the cap for energy output to avoid overloading ThermoCore or connected storage systems.
+max_energy_output: 450
+
+# title: High-energy simulation duration (in seconds)
+# required: False
+# description-lines:
+# Specifies the duration ThermoCore operates under high-energy conditions.
+# Shorter durations are safer but generate less energy.
+# Longer durations may increase energy generation but risk overheating.
+simulation_duration: 300
+
+# Any comment
+operation_modes:
+  - "Standard"
+  - "High-Energy"
+  - "Emergency Cooldown"
+  - "Maintenance"
+
+coolant_types:
+  - Water-based
+  - Gel-based
+  - Synthetic
