@@ -1,6 +1,6 @@
 galaxy_info:
   author: Lucian BLETAN
-  description: your role description
+  description: An advanced Ansible role simulating high-energy conditions in a futuristic ThermoCore system for adaptive energy generation and environmental resilience.
   company: your company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the

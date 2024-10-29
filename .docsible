@@ -1,8 +1,8 @@
 aap_hub: null
 automation_kind: null
-category: null
-critical: null
-description: null
+category: demo
+critical: high
+description: An advanced Ansible role simulating high-energy conditions in a futuristic ThermoCore system for adaptive energy generation and environmental resilience.
 dt_dev: null
 dt_prod: null
 dt_update: 29/10/2024
