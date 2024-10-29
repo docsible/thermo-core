@@ -6,12 +6,15 @@
 
 
 
-Description: your role description
+Description: An advanced Ansible role simulating high-energy conditions in a futuristic ThermoCore system for adaptive energy generation and environmental resilience.
 
 
 | Field                | Value           |
 |--------------------- |-----------------|
+| Functional description | An advanced Ansible role simulating high-energy conditions in a futuristic ThermoCore system for adaptive energy generation and environmental resilience. |
 | Readme update        | 29/10/2024 |
+| Category             | demo |
+| Critical ⚠️          | high |
 
 
 
