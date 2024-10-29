@@ -1,0 +1,49 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches:
+      - main  # Run on pushes to the main branch
+  workflow_dispatch:  # Allow manual triggers
+
+jobs:
+  generate_docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'  # Specify the Python version
+
+      # Step 3: Install Docsible from the specified branch
+      - name: Install Docsible
+        run: |
+          pip install git+https://github.com/docsible/docsible.git@name-prefix-in-ansible-lint
+
+      # Step 4: Run Docsible to generate documentation
+      - name: Generate documentation for ThermoCore role
+        run: |
+          docsible -c ./ -g -o README.md -a -com  # Adjust path or flags as needed
+
+      # Step 5: Check for changes
+      - name: Check for documentation changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if git diff-index --cached --quiet HEAD --; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+      # Step 6: Commit and push changes
+      - name: Commit and push documentation
+        run: |
+          git commit -m "Automated documentation update by GitHub Actions"
+          git push origin main
