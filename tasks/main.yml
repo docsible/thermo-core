@@ -1,192 +1,163 @@
-<!-- DOCSIBLE START -->
-
-# 📃 Role overview
-
-## thermo-core
-
-```
-Role belongs to lucian/devops
-Namespace - lucian
-Collection - devops
-Version - 1.0.0
-Repository - http://example.com/repository
-```
-
-Description: your role description
-
-
-| Field                | Value           |
-|--------------------- |-----------------|
-| Readme update        | 03/11/2024 |
-
-
-
-
-
-
-
-
-
-
-
-
-### Tasks
-
-
-#### File: tasks/main.yml
-
-| Name | Module | Has Conditions | Comments |
-| ---- | ------ | --------- |  -------- |
-| Start ThermoCore diagnostics | ansible.builtin.debug | False | tasks file for thermo-core Initialize system and environment |
-| Check ambient environmental conditions | block | False |  |
-| Fetch ambient temperature and pressure | ansible.builtin.set_fact | False |  |
-| Verify ambient conditions for high-energy simulation | ansible.builtin.debug | True |  |
-| Configure ThermoCore for high-energy conditions | block | False | Initialize high-temperature and high-pressure simulation |
-| Set high temperature and pressure thresholds | ansible.builtin.set_fact | False |  |
-| Activate high-energy synthesis mode | ansible.builtin.debug | False |  |
-| Begin energy generation cycle | block | False | Simulate energy generation cycle |
-| Initialize energy storage capacitors | ansible.builtin.debug | False |  |
-| Simulate energy output based on temperature and pressure | ansible.builtin.set_fact | True |  |
-| Confirm energy generation success | ansible.builtin.debug | False |  |
-| Monitor for heat dissipation and coolant levels | block | False | Environmental monitoring and resource checks |
-| Measure coolant levels | ansible.builtin.set_fact | False |  |
-| Check if coolant levels are sufficient | ansible.builtin.debug | True |  |
-| Alert if coolant is low | ansible.builtin.debug | True |  |
-| Verify pressure containment integrity | block | False | Safety checks for pressure containment |
-| Check pressure containment status | ansible.builtin.set_fact | False |  |
-| Ensure containment for continued operation | ansible.builtin.debug | True |  |
-| Adaptive energy generation based on environmental feedback | block | False | Adjust energy generation based on environmental input |
-| Gather environmental feedback data | ansible.builtin.set_fact | False |  |
-| Adjust ThermoCore thresholds based on environment | ansible.builtin.debug | False |  |
-| Adaptive cycle based on operational data | block | False | Machine learning feedback for system optimization |
-| Integrate operational data into learning model | ansible.builtin.debug | False |  |
-| Adjust thresholds based on feedback loop | ansible.builtin.debug | True |  |
-| Perform end-of-cycle diagnostics | block | False | Final cycle diagnostics |
-| Check all system metrics post-energy generation | ansible.builtin.debug | False |  |
-| Review energy efficiency metrics | ansible.builtin.debug | False |  |
-| Begin ThermoCore shutdown | ansible.builtin.debug | False | Shutdown and cooling procedures |
-| Run cooldown diagnostics | block | False |  |
-| Monitor system cooldown rates | ansible.builtin.set_fact | False |  |
-| Confirm cooldown success | ansible.builtin.debug | True |  |
-
-
-## Task Flow Graphs
-
-
-
-### Graph for main.yml
-
-```mermaid
-flowchart TD
-Start
-classDef block stroke:#3498db,stroke-width:2px;
-classDef task stroke:#4b76bb,stroke-width:2px;
-classDef includeTasks stroke:#16a085,stroke-width:2px;
-classDef importTasks stroke:#34495e,stroke-width:2px;
-classDef includeRole stroke:#2980b9,stroke-width:2px;
-classDef importRole stroke:#699ba7,stroke-width:2px;
-classDef includeVars stroke:#8e44ad,stroke-width:2px;
-classDef rescue stroke:#665352,stroke-width:2px;
-
-  Start-->|Task| Start_ThermoCore_diagnostics0[start thermocore diagnostics]:::task
-  Start_ThermoCore_diagnostics0-->|Block Start| Check_ambient_environmental_conditions1_block_start_0[[check ambient environmental conditions]]:::block
-  Check_ambient_environmental_conditions1_block_start_0-->|Task| Fetch_ambient_temperature_and_pressure0[fetch ambient temperature and pressure]:::task
-  Fetch_ambient_temperature_and_pressure0-->|Task| Verify_ambient_conditions_for_high_energy_simulation1[verify ambient conditions for high energy<br>simulation<br>When: **ambient temperature   int   45  and  ambient<br>pressure   int   1000**]:::task
-  Verify_ambient_conditions_for_high_energy_simulation1-.->|End of Block| Check_ambient_environmental_conditions1_block_start_0
-  Verify_ambient_conditions_for_high_energy_simulation1-->|Rescue Start| Check_ambient_environmental_conditions1_rescue_start_0[check ambient environmental conditions]:::rescue
-  Check_ambient_environmental_conditions1_rescue_start_0-->|Task| Handle_unfavorable_ambient_conditions0[handle unfavorable ambient conditions]:::task
-  Handle_unfavorable_ambient_conditions0-.->|End of Rescue Block| Check_ambient_environmental_conditions1_block_start_0
-  Handle_unfavorable_ambient_conditions0-->|Block Start| Configure_ThermoCore_for_high_energy_conditions2_block_start_0[[configure thermocore for high energy conditions]]:::block
-  Configure_ThermoCore_for_high_energy_conditions2_block_start_0-->|Task| Set_high_temperature_and_pressure_thresholds0[set high temperature and pressure thresholds]:::task
-  Set_high_temperature_and_pressure_thresholds0-->|Task| Activate_high_energy_synthesis_mode1[activate high energy synthesis mode]:::task
-  Activate_high_energy_synthesis_mode1-.->|End of Block| Configure_ThermoCore_for_high_energy_conditions2_block_start_0
-  Activate_high_energy_synthesis_mode1-->|Rescue Start| Configure_ThermoCore_for_high_energy_conditions2_rescue_start_0[configure thermocore for high energy conditions]:::rescue
-  Configure_ThermoCore_for_high_energy_conditions2_rescue_start_0-->|Task| Handle_ThermoCore_setup_failure0[handle thermocore setup failure]:::task
-  Handle_ThermoCore_setup_failure0-.->|End of Rescue Block| Configure_ThermoCore_for_high_energy_conditions2_block_start_0
-  Handle_ThermoCore_setup_failure0-->|Block Start| Begin_energy_generation_cycle3_block_start_0[[begin energy generation cycle]]:::block
-  Begin_energy_generation_cycle3_block_start_0-->|Task| Initialize_energy_storage_capacitors0[initialize energy storage capacitors]:::task
-  Initialize_energy_storage_capacitors0-->|Task| Simulate_energy_output_based_on_temperature_and_pressure1[simulate energy output based on temperature and<br>pressure<br>When: **target temperature   int   min temperature<br>threshold and target pressure   int   optimal<br>pressure threshold**]:::task
-  Simulate_energy_output_based_on_temperature_and_pressure1-->|Task| Confirm_energy_generation_success2[confirm energy generation success]:::task
-  Confirm_energy_generation_success2-.->|End of Block| Begin_energy_generation_cycle3_block_start_0
-  Confirm_energy_generation_success2-->|Rescue Start| Begin_energy_generation_cycle3_rescue_start_0[begin energy generation cycle]:::rescue
-  Begin_energy_generation_cycle3_rescue_start_0-->|Task| Handle_energy_generation_failure0[handle energy generation failure]:::task
-  Handle_energy_generation_failure0-.->|End of Rescue Block| Begin_energy_generation_cycle3_block_start_0
-  Handle_energy_generation_failure0-->|Block Start| Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0[[monitor for heat dissipation and coolant levels]]:::block
-  Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0-->|Task| Measure_coolant_levels0[measure coolant levels]:::task
-  Measure_coolant_levels0-->|Task| Check_if_coolant_levels_are_sufficient1[check if coolant levels are sufficient<br>When: **coolant level   int    coolant level threshold**]:::task
-  Check_if_coolant_levels_are_sufficient1-->|Task| Alert_if_coolant_is_low2[alert if coolant is low<br>When: **coolant level   int   coolant level threshold**]:::task
-  Alert_if_coolant_is_low2-.->|End of Block| Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0
-  Alert_if_coolant_is_low2-->|Rescue Start| Monitor_for_heat_dissipation_and_coolant_levels4_rescue_start_0[monitor for heat dissipation and coolant levels]:::rescue
-  Monitor_for_heat_dissipation_and_coolant_levels4_rescue_start_0-->|Task| Activate_emergency_coolant_system0[activate emergency coolant system]:::task
-  Activate_emergency_coolant_system0-.->|End of Rescue Block| Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0
-  Activate_emergency_coolant_system0-->|Block Start| Verify_pressure_containment_integrity5_block_start_0[[verify pressure containment integrity]]:::block
-  Verify_pressure_containment_integrity5_block_start_0-->|Task| Check_pressure_containment_status0[check pressure containment status]:::task
-  Check_pressure_containment_status0-->|Task| Ensure_containment_for_continued_operation1[ensure containment for continued operation<br>When: **containment integrity     intact**]:::task
-  Ensure_containment_for_continued_operation1-.->|End of Block| Verify_pressure_containment_integrity5_block_start_0
-  Ensure_containment_for_continued_operation1-->|Rescue Start| Verify_pressure_containment_integrity5_rescue_start_0[verify pressure containment integrity]:::rescue
-  Verify_pressure_containment_integrity5_rescue_start_0-->|Task| Engage_containment_failure_protocols0[engage containment failure protocols]:::task
-  Engage_containment_failure_protocols0-.->|End of Rescue Block| Verify_pressure_containment_integrity5_block_start_0
-  Engage_containment_failure_protocols0-->|Block Start| Adaptive_energy_generation_based_on_environmental_feedback6_block_start_0[[adaptive energy generation based on environmental<br>feedback]]:::block
-  Adaptive_energy_generation_based_on_environmental_feedback6_block_start_0-->|Task| Gather_environmental_feedback_data0[gather environmental feedback data]:::task
-  Gather_environmental_feedback_data0-->|Task| Adjust_ThermoCore_thresholds_based_on_environment1[adjust thermocore thresholds based on environment]:::task
-  Adjust_ThermoCore_thresholds_based_on_environment1-.->|End of Block| Adaptive_energy_generation_based_on_environmental_feedback6_block_start_0
-  Adjust_ThermoCore_thresholds_based_on_environment1-->|Rescue Start| Adaptive_energy_generation_based_on_environmental_feedback6_rescue_start_0[adaptive energy generation based on environmental<br>feedback]:::rescue
-  Adaptive_energy_generation_based_on_environmental_feedback6_rescue_start_0-->|Task| Handle_external_data_retrieval_failure0[handle external data retrieval failure]:::task
-  Handle_external_data_retrieval_failure0-.->|End of Rescue Block| Adaptive_energy_generation_based_on_environmental_feedback6_block_start_0
-  Handle_external_data_retrieval_failure0-->|Block Start| Adaptive_cycle_based_on_operational_data7_block_start_0[[adaptive cycle based on operational data]]:::block
-  Adaptive_cycle_based_on_operational_data7_block_start_0-->|Task| Integrate_operational_data_into_learning_model0[integrate operational data into learning model]:::task
-  Integrate_operational_data_into_learning_model0-->|Task| Adjust_thresholds_based_on_feedback_loop1[adjust thresholds based on feedback loop<br>When: **learning model ready   default false**]:::task
-  Adjust_thresholds_based_on_feedback_loop1-.->|End of Block| Adaptive_cycle_based_on_operational_data7_block_start_0
-  Adjust_thresholds_based_on_feedback_loop1-->|Rescue Start| Adaptive_cycle_based_on_operational_data7_rescue_start_0[adaptive cycle based on operational data]:::rescue
-  Adaptive_cycle_based_on_operational_data7_rescue_start_0-->|Task| Manage_learning_model_integration_failure0[manage learning model integration failure]:::task
-  Manage_learning_model_integration_failure0-.->|End of Rescue Block| Adaptive_cycle_based_on_operational_data7_block_start_0
-  Manage_learning_model_integration_failure0-->|Block Start| Perform_end_of_cycle_diagnostics8_block_start_0[[perform end of cycle diagnostics]]:::block
-  Perform_end_of_cycle_diagnostics8_block_start_0-->|Task| Check_all_system_metrics_post_energy_generation0[check all system metrics post energy generation]:::task
-  Check_all_system_metrics_post_energy_generation0-->|Task| Review_energy_efficiency_metrics1[review energy efficiency metrics]:::task
-  Review_energy_efficiency_metrics1-.->|End of Block| Perform_end_of_cycle_diagnostics8_block_start_0
-  Review_energy_efficiency_metrics1-->|Rescue Start| Perform_end_of_cycle_diagnostics8_rescue_start_0[perform end of cycle diagnostics]:::rescue
-  Perform_end_of_cycle_diagnostics8_rescue_start_0-->|Task| Handle_diagnostics_failure0[handle diagnostics failure]:::task
-  Handle_diagnostics_failure0-.->|End of Rescue Block| Perform_end_of_cycle_diagnostics8_block_start_0
-  Handle_diagnostics_failure0-->|Task| Begin_ThermoCore_shutdown9[begin thermocore shutdown]:::task
-  Begin_ThermoCore_shutdown9-->|Block Start| Run_cooldown_diagnostics10_block_start_0[[run cooldown diagnostics]]:::block
-  Run_cooldown_diagnostics10_block_start_0-->|Task| Monitor_system_cooldown_rates0[monitor system cooldown rates]:::task
-  Monitor_system_cooldown_rates0-->|Task| Confirm_cooldown_success1[confirm cooldown success<br>When: **cooldown rate     nominal**]:::task
-  Confirm_cooldown_success1-.->|End of Block| Run_cooldown_diagnostics10_block_start_0
-  Confirm_cooldown_success1-->|Rescue Start| Run_cooldown_diagnostics10_rescue_start_0[run cooldown diagnostics]:::rescue
-  Run_cooldown_diagnostics10_rescue_start_0-->|Task| Emergency_cooldown_protocol0[emergency cooldown protocol]:::task
-  Emergency_cooldown_protocol0-.->|End of Rescue Block| Run_cooldown_diagnostics10_block_start_0
-  Emergency_cooldown_protocol0-->End
-```
-
-
-## Playbook
-
-```yml
 ---
-- hosts: localhost
-  remote_user: root
-  roles:
-    - thermo-core
+# tasks file for thermo-core
 
-```
-## Playbook graph
-```mermaid
-flowchart TD
-  localhost-->|Role| thermo_core[thermo core]
-```
+# Initialize system and environment
+- name: Start ThermoCore diagnostics
+  ansible.builtin.debug:
+    msg: "Initializing ThermoCore diagnostics and energy synthesis procedures."
 
-## Author Information
-your name
+- name: Check ambient environmental conditions
+  block:
+    - name: Fetch ambient temperature and pressure
+      ansible.builtin.set_fact:
+        ambient_temperature: 35  # Example starting value
+        ambient_pressure: 1010   # Example static pressure
 
-#### License
+    - name: Verify ambient conditions for high-energy simulation
+      ansible.builtin.debug:
+        msg: "Ambient temperature and pressure are within acceptable limits for ThermoCore activation."
+      when: (ambient_temperature | int < 45) and (ambient_pressure | int > 1000)
+  rescue:
+    - name: Handle unfavorable ambient conditions
+      ansible.builtin.debug:
+        msg: "Ambient conditions unsuitable. Delaying activation and notifying support systems."
 
-license (GPL-2.0-or-later, MIT, etc)
+# Initialize high-temperature and high-pressure simulation
+- name: Configure ThermoCore for high-energy conditions
+  block:
+    - name: Set high temperature and pressure thresholds
+      ansible.builtin.set_fact:
+        target_temperature: "{{ min_temperature_threshold | int + 2000 }}"  # High-temperature simulation
+        target_pressure: "{{ optimal_pressure_threshold | int + 500 }}"     # High-pressure simulation
 
-#### Minimum Ansible Version
+    - name: Activate high-energy synthesis mode
+      ansible.builtin.debug:
+        msg: "Activating high-energy synthesis mode with target temperature {{ target_temperature }}K and pressure {{ target_pressure }}Pa."
+  rescue:
+    - name: Handle ThermoCore setup failure
+      ansible.builtin.debug:
+        msg: "Failed to set high-energy thresholds, reverting to safe mode."
 
-2.1
+# Simulate energy generation cycle
+- name: Begin energy generation cycle
+  block:
+    - name: Initialize energy storage capacitors
+      ansible.builtin.debug:
+        msg: "Energy storage capacitors initialized for thermal energy absorption."
 
-#### Platforms
+    - name: Simulate energy output based on temperature and pressure
+      ansible.builtin.set_fact:
+        generated_energy: "{{ target_temperature * target_pressure / 1000000 }}"  # Simplified energy calculation
+      when: target_temperature | int > min_temperature_threshold and target_pressure | int > optimal_pressure_threshold
 
-No platforms specified.
-<!-- DOCSIBLE END -->
+    - name: Confirm energy generation success
+      ansible.builtin.debug:
+        msg: "Generated {{ generated_energy }}MW of energy under current conditions."
+  rescue:
+    - name: Handle energy generation failure
+      ansible.builtin.debug:
+        msg: "ThermoCore energy generation failed. Lowering thresholds and recalibrating."
+
+# Environmental monitoring and resource checks
+- name: Monitor for heat dissipation and coolant levels
+  block:
+    - name: Measure coolant levels
+      ansible.builtin.set_fact:
+        coolant_level: 50  # Example static value
+
+    - name: Check if coolant levels are sufficient
+      ansible.builtin.debug:
+        msg: "Coolant levels sufficient for sustained operations."
+      when: coolant_level | int >= coolant_level_threshold
+
+    - name: Alert if coolant is low
+      ansible.builtin.debug:
+        msg: "Warning: coolant levels below operational threshold."
+      when: coolant_level | int < coolant_level_threshold
+  rescue:
+    - name: Activate emergency coolant system
+      ansible.builtin.debug:
+        msg: "Emergency coolant system activated due to low levels."
+
+# Safety checks for pressure containment
+- name: Verify pressure containment integrity
+  block:
+    - name: Check pressure containment status
+      ansible.builtin.set_fact:
+        containment_integrity: "intact"  # Simulated static value
+
+    - name: Ensure containment for continued operation
+      ansible.builtin.debug:
+        msg: "Containment system holding, safe for continued operation."
+      when: containment_integrity == "intact"
+  rescue:
+    - name: Engage containment failure protocols
+      ansible.builtin.debug:
+        msg: "Containment breach detected! Shutting down ThermoCore to prevent hazards."
+
+# Adjust energy generation based on environmental input
+- name: Adaptive energy generation based on environmental feedback
+  block:
+    - name: Gather environmental feedback data
+      ansible.builtin.set_fact:
+        external_temperature: 45  # Mock value
+        external_pressure: 980    # Mock value
+
+    - name: Adjust ThermoCore thresholds based on environment
+      ansible.builtin.debug:
+        msg: "Adjusting thresholds to maintain optimal energy output with external temp {{ external_temperature }}°C and pressure {{ external_pressure }}Pa."
+  rescue:
+    - name: Handle external data retrieval failure
+      ansible.builtin.debug:
+        msg: "Failed to retrieve external data. Using default thresholds for energy generation."
+
+# Machine learning feedback for system optimization
+- name: Adaptive cycle based on operational data
+  block:
+    - name: Integrate operational data into learning model
+      ansible.builtin.debug:
+        msg: "Integrating operational data into machine learning model for future optimizations."
+
+    - name: Adjust thresholds based on feedback loop
+      ansible.builtin.debug:
+        msg: "Thresholds adjusted according to real-time feedback and learning model data."
+      when: "learning_model_ready | default(false)"
+  rescue:
+    - name: Manage learning model integration failure
+      ansible.builtin.debug:
+        msg: "Machine learning model update failed; running on default configurations."
+
+# Final cycle diagnostics
+- name: Perform end-of-cycle diagnostics
+  block:
+    - name: Check all system metrics post-energy generation
+      ansible.builtin.debug:
+        msg: "Performing end-of-cycle diagnostics for ThermoCore system stability."
+
+    - name: Review energy efficiency metrics
+      ansible.builtin.debug:
+        msg: "Energy efficiency for the current cycle: {{ generated_energy | default('N/A') }}MW."
+  rescue:
+    - name: Handle diagnostics failure
+      ansible.builtin.debug:
+        msg: "Diagnostics incomplete; scheduling further analysis."
+
+# Shutdown and cooling procedures
+- name: Begin ThermoCore shutdown
+  ansible.builtin.debug:
+    msg: "Initiating controlled shutdown and cooling of ThermoCore system."
+
+- name: Run cooldown diagnostics
+  block:
+    - name: Monitor system cooldown rates
+      ansible.builtin.set_fact:
+        cooldown_rate: "nominal"  # Simulated value
+
+    - name: Confirm cooldown success
+      ansible.builtin.debug:
+        msg: "Cooldown successful; ThermoCore safe for maintenance."
+      when: cooldown_rate == "nominal"
+  rescue:
+    - name: Emergency cooldown protocol
+      ansible.builtin.debug:
+        msg: "Emergency cooldown initiated due to excessive heat."
