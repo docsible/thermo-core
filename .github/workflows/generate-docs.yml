@@ -24,7 +24,7 @@ jobs:
 
       - name: Install Docsible
         run: |
-          pip install git+https://github.com/docsible/docsible.git@name-prefix-in-ansible-lint
+          pip install git+https://github.com/docsible/docsible.git
 
       - name: Generate documentation for role
         run: |
