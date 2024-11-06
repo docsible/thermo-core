@@ -123,23 +123,19 @@ flowchart TD
 Start
 classDef block stroke:#3498db,stroke-width:2px;
 classDef task stroke:#4b76bb,stroke-width:2px;
-classDef include stroke:#2ecc71,stroke-width:2px;
-classDef import stroke:#f39c12,stroke-width:2px;
-classDef rescue stroke:#665352,stroke-width:2px;
-classDef importPlaybook stroke:#9b59b6,stroke-width:2px;
-classDef importTasks stroke:#34495e,stroke-width:2px;
 classDef includeTasks stroke:#16a085,stroke-width:2px;
-classDef importRole stroke:#699ba7,stroke-width:2px;
+classDef importTasks stroke:#34495e,stroke-width:2px;
 classDef includeRole stroke:#2980b9,stroke-width:2px;
+classDef importRole stroke:#699ba7,stroke-width:2px;
 classDef includeVars stroke:#8e44ad,stroke-width:2px;
+classDef rescue stroke:#665352,stroke-width:2px;
 
   Start-->|Task| Start_ThermoCore_diagnostics0[start thermocore diagnostics]:::task
   Start_ThermoCore_diagnostics0-->|Block Start| Check_ambient_environmental_conditions1_block_start_0[[check ambient environmental conditions]]:::block
   Check_ambient_environmental_conditions1_block_start_0-->|Task| Fetch_ambient_temperature_and_pressure0[fetch ambient temperature and pressure]:::task
-  Fetch_ambient_temperature_and_pressure0-->|Task| Verify_ambient_conditions_for_high_energy_simulation1_when__ambient_temperature___int___45__and__ambient_pressure___int___1000_[verify ambient conditions for high energy<br>simulation]:::task
-  Verify_ambient_conditions_for_high_energy_simulation1_when__ambient_temperature___int___45__and__ambient_pressure___int___1000_---|When:  ambient temperature   int   45  and  ambient<br>pressure   int   1000 | Verify_ambient_conditions_for_high_energy_simulation1_when__ambient_temperature___int___45__and__ambient_pressure___int___1000_
-  Verify_ambient_conditions_for_high_energy_simulation1_when__ambient_temperature___int___45__and__ambient_pressure___int___1000_-.->|End of Block| Check_ambient_environmental_conditions1_block_start_0
-  Verify_ambient_conditions_for_high_energy_simulation1_when__ambient_temperature___int___45__and__ambient_pressure___int___1000_-->|Rescue Start| Check_ambient_environmental_conditions1_rescue_start_0[check ambient environmental conditions]:::rescue
+  Fetch_ambient_temperature_and_pressure0-->|Task| Verify_ambient_conditions_for_high_energy_simulation1[verify ambient conditions for high energy<br>simulation<br>When: **ambient temperature   int   45  and  ambient<br>pressure   int   1000**]:::task
+  Verify_ambient_conditions_for_high_energy_simulation1-.->|End of Block| Check_ambient_environmental_conditions1_block_start_0
+  Verify_ambient_conditions_for_high_energy_simulation1-->|Rescue Start| Check_ambient_environmental_conditions1_rescue_start_0[check ambient environmental conditions]:::rescue
   Check_ambient_environmental_conditions1_rescue_start_0-->|Task| Handle_unfavorable_ambient_conditions0[handle unfavorable ambient conditions]:::task
   Handle_unfavorable_ambient_conditions0-.->|End of Rescue Block| Check_ambient_environmental_conditions1_block_start_0
   Handle_unfavorable_ambient_conditions0-->|Block Start| Configure_ThermoCore_for_high_energy_conditions2_block_start_0[[configure thermocore for high energy conditions]]:::block
@@ -151,29 +147,25 @@ classDef includeVars stroke:#8e44ad,stroke-width:2px;
   Handle_ThermoCore_setup_failure0-.->|End of Rescue Block| Configure_ThermoCore_for_high_energy_conditions2_block_start_0
   Handle_ThermoCore_setup_failure0-->|Block Start| Begin_energy_generation_cycle3_block_start_0[[begin energy generation cycle]]:::block
   Begin_energy_generation_cycle3_block_start_0-->|Task| Initialize_energy_storage_capacitors0[initialize energy storage capacitors]:::task
-  Initialize_energy_storage_capacitors0-->|Task| Simulate_energy_output_based_on_temperature_and_pressure1_when_target_temperature___int___min_temperature_threshold_and_target_pressure___int___optimal_pressure_threshold[simulate energy output based on temperature and<br>pressure]:::task
-  Simulate_energy_output_based_on_temperature_and_pressure1_when_target_temperature___int___min_temperature_threshold_and_target_pressure___int___optimal_pressure_threshold---|When: target temperature   int   min temperature<br>threshold and target pressure   int   optimal<br>pressure threshold| Simulate_energy_output_based_on_temperature_and_pressure1_when_target_temperature___int___min_temperature_threshold_and_target_pressure___int___optimal_pressure_threshold
-  Simulate_energy_output_based_on_temperature_and_pressure1_when_target_temperature___int___min_temperature_threshold_and_target_pressure___int___optimal_pressure_threshold-->|Task| Confirm_energy_generation_success2[confirm energy generation success]:::task
+  Initialize_energy_storage_capacitors0-->|Task| Simulate_energy_output_based_on_temperature_and_pressure1[simulate energy output based on temperature and<br>pressure<br>When: **target temperature   int   min temperature<br>threshold and target pressure   int   optimal<br>pressure threshold**]:::task
+  Simulate_energy_output_based_on_temperature_and_pressure1-->|Task| Confirm_energy_generation_success2[confirm energy generation success]:::task
   Confirm_energy_generation_success2-.->|End of Block| Begin_energy_generation_cycle3_block_start_0
   Confirm_energy_generation_success2-->|Rescue Start| Begin_energy_generation_cycle3_rescue_start_0[begin energy generation cycle]:::rescue
   Begin_energy_generation_cycle3_rescue_start_0-->|Task| Handle_energy_generation_failure0[handle energy generation failure]:::task
   Handle_energy_generation_failure0-.->|End of Rescue Block| Begin_energy_generation_cycle3_block_start_0
   Handle_energy_generation_failure0-->|Block Start| Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0[[monitor for heat dissipation and coolant levels]]:::block
   Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0-->|Task| Measure_coolant_levels0[measure coolant levels]:::task
-  Measure_coolant_levels0-->|Task| Check_if_coolant_levels_are_sufficient1_when_coolant_level___int____coolant_level_threshold[check if coolant levels are sufficient]:::task
-  Check_if_coolant_levels_are_sufficient1_when_coolant_level___int____coolant_level_threshold---|When: coolant level   int    coolant level threshold| Check_if_coolant_levels_are_sufficient1_when_coolant_level___int____coolant_level_threshold
-  Check_if_coolant_levels_are_sufficient1_when_coolant_level___int____coolant_level_threshold-->|Task| Alert_if_coolant_is_low2_when_coolant_level___int___coolant_level_threshold[alert if coolant is low]:::task
-  Alert_if_coolant_is_low2_when_coolant_level___int___coolant_level_threshold---|When: coolant level   int   coolant level threshold| Alert_if_coolant_is_low2_when_coolant_level___int___coolant_level_threshold
-  Alert_if_coolant_is_low2_when_coolant_level___int___coolant_level_threshold-.->|End of Block| Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0
-  Alert_if_coolant_is_low2_when_coolant_level___int___coolant_level_threshold-->|Rescue Start| Monitor_for_heat_dissipation_and_coolant_levels4_rescue_start_0[monitor for heat dissipation and coolant levels]:::rescue
+  Measure_coolant_levels0-->|Task| Check_if_coolant_levels_are_sufficient1[check if coolant levels are sufficient<br>When: **coolant level   int    coolant level threshold**]:::task
+  Check_if_coolant_levels_are_sufficient1-->|Task| Alert_if_coolant_is_low2[alert if coolant is low<br>When: **coolant level   int   coolant level threshold**]:::task
+  Alert_if_coolant_is_low2-.->|End of Block| Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0
+  Alert_if_coolant_is_low2-->|Rescue Start| Monitor_for_heat_dissipation_and_coolant_levels4_rescue_start_0[monitor for heat dissipation and coolant levels]:::rescue
   Monitor_for_heat_dissipation_and_coolant_levels4_rescue_start_0-->|Task| Activate_emergency_coolant_system0[activate emergency coolant system]:::task
   Activate_emergency_coolant_system0-.->|End of Rescue Block| Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0
   Activate_emergency_coolant_system0-->|Block Start| Verify_pressure_containment_integrity5_block_start_0[[verify pressure containment integrity]]:::block
   Verify_pressure_containment_integrity5_block_start_0-->|Task| Check_pressure_containment_status0[check pressure containment status]:::task
-  Check_pressure_containment_status0-->|Task| Ensure_containment_for_continued_operation1_when_containment_integrity_____intact_[ensure containment for continued operation]:::task
-  Ensure_containment_for_continued_operation1_when_containment_integrity_____intact_---|When: containment integrity     intact | Ensure_containment_for_continued_operation1_when_containment_integrity_____intact_
-  Ensure_containment_for_continued_operation1_when_containment_integrity_____intact_-.->|End of Block| Verify_pressure_containment_integrity5_block_start_0
-  Ensure_containment_for_continued_operation1_when_containment_integrity_____intact_-->|Rescue Start| Verify_pressure_containment_integrity5_rescue_start_0[verify pressure containment integrity]:::rescue
+  Check_pressure_containment_status0-->|Task| Ensure_containment_for_continued_operation1[ensure containment for continued operation<br>When: **containment integrity     intact**]:::task
+  Ensure_containment_for_continued_operation1-.->|End of Block| Verify_pressure_containment_integrity5_block_start_0
+  Ensure_containment_for_continued_operation1-->|Rescue Start| Verify_pressure_containment_integrity5_rescue_start_0[verify pressure containment integrity]:::rescue
   Verify_pressure_containment_integrity5_rescue_start_0-->|Task| Engage_containment_failure_protocols0[engage containment failure protocols]:::task
   Engage_containment_failure_protocols0-.->|End of Rescue Block| Verify_pressure_containment_integrity5_block_start_0
   Engage_containment_failure_protocols0-->|Block Start| Adaptive_energy_generation_based_on_environmental_feedback6_block_start_0[[adaptive energy generation based on environmental<br>feedback]]:::block
@@ -185,10 +177,9 @@ classDef includeVars stroke:#8e44ad,stroke-width:2px;
   Handle_external_data_retrieval_failure0-.->|End of Rescue Block| Adaptive_energy_generation_based_on_environmental_feedback6_block_start_0
   Handle_external_data_retrieval_failure0-->|Block Start| Adaptive_cycle_based_on_operational_data7_block_start_0[[adaptive cycle based on operational data]]:::block
   Adaptive_cycle_based_on_operational_data7_block_start_0-->|Task| Integrate_operational_data_into_learning_model0[integrate operational data into learning model]:::task
-  Integrate_operational_data_into_learning_model0-->|Task| Adjust_thresholds_based_on_feedback_loop1_when_learning_model_ready___default_false_[adjust thresholds based on feedback loop]:::task
-  Adjust_thresholds_based_on_feedback_loop1_when_learning_model_ready___default_false_---|When: learning model ready   default false | Adjust_thresholds_based_on_feedback_loop1_when_learning_model_ready___default_false_
-  Adjust_thresholds_based_on_feedback_loop1_when_learning_model_ready___default_false_-.->|End of Block| Adaptive_cycle_based_on_operational_data7_block_start_0
-  Adjust_thresholds_based_on_feedback_loop1_when_learning_model_ready___default_false_-->|Rescue Start| Adaptive_cycle_based_on_operational_data7_rescue_start_0[adaptive cycle based on operational data]:::rescue
+  Integrate_operational_data_into_learning_model0-->|Task| Adjust_thresholds_based_on_feedback_loop1[adjust thresholds based on feedback loop<br>When: **learning model ready   default false**]:::task
+  Adjust_thresholds_based_on_feedback_loop1-.->|End of Block| Adaptive_cycle_based_on_operational_data7_block_start_0
+  Adjust_thresholds_based_on_feedback_loop1-->|Rescue Start| Adaptive_cycle_based_on_operational_data7_rescue_start_0[adaptive cycle based on operational data]:::rescue
   Adaptive_cycle_based_on_operational_data7_rescue_start_0-->|Task| Manage_learning_model_integration_failure0[manage learning model integration failure]:::task
   Manage_learning_model_integration_failure0-.->|End of Rescue Block| Adaptive_cycle_based_on_operational_data7_block_start_0
   Manage_learning_model_integration_failure0-->|Block Start| Perform_end_of_cycle_diagnostics8_block_start_0[[perform end of cycle diagnostics]]:::block
@@ -201,10 +192,9 @@ classDef includeVars stroke:#8e44ad,stroke-width:2px;
   Handle_diagnostics_failure0-->|Task| Begin_ThermoCore_shutdown9[begin thermocore shutdown]:::task
   Begin_ThermoCore_shutdown9-->|Block Start| Run_cooldown_diagnostics10_block_start_0[[run cooldown diagnostics]]:::block
   Run_cooldown_diagnostics10_block_start_0-->|Task| Monitor_system_cooldown_rates0[monitor system cooldown rates]:::task
-  Monitor_system_cooldown_rates0-->|Task| Confirm_cooldown_success1_when_cooldown_rate_____nominal_[confirm cooldown success]:::task
-  Confirm_cooldown_success1_when_cooldown_rate_____nominal_---|When: cooldown rate     nominal | Confirm_cooldown_success1_when_cooldown_rate_____nominal_
-  Confirm_cooldown_success1_when_cooldown_rate_____nominal_-.->|End of Block| Run_cooldown_diagnostics10_block_start_0
-  Confirm_cooldown_success1_when_cooldown_rate_____nominal_-->|Rescue Start| Run_cooldown_diagnostics10_rescue_start_0[run cooldown diagnostics]:::rescue
+  Monitor_system_cooldown_rates0-->|Task| Confirm_cooldown_success1[confirm cooldown success<br>When: **cooldown rate     nominal**]:::task
+  Confirm_cooldown_success1-.->|End of Block| Run_cooldown_diagnostics10_block_start_0
+  Confirm_cooldown_success1-->|Rescue Start| Run_cooldown_diagnostics10_rescue_start_0[run cooldown diagnostics]:::rescue
   Run_cooldown_diagnostics10_rescue_start_0-->|Task| Emergency_cooldown_protocol0[emergency cooldown protocol]:::task
   Emergency_cooldown_protocol0-.->|End of Rescue Block| Run_cooldown_diagnostics10_block_start_0
   Emergency_cooldown_protocol0-->End
