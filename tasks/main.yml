@@ -13,10 +13,6 @@
         ambient_temperature: 35  # Example starting value
         ambient_pressure: 1010   # Example static pressure
 
-    - name: Verify ambient conditions for high-energy simulation
-      ansible.builtin.debug:
-        msg: "Ambient temperature and pressure are within acceptable limits for ThermoCore activation."
-      when: (ambient_temperature | int < 45) and (ambient_pressure | int > 1000)
   rescue:
     - name: Handle unfavorable ambient conditions
       ansible.builtin.debug:
