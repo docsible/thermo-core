@@ -4,7 +4,7 @@
 # title: Minimum temperature required for energy generation (in °K)
 # required: True
 # description: The minimum core temperature required to initiate the energy synthesis process.
-min_temperature_threshold: 3000
+min_temperature_threshold: 4000
 
 # title: Target pressure for optimal energy generation (in Pa)
 # required: True
