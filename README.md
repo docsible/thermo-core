@@ -29,17 +29,17 @@ Description: An advanced Ansible role simulating high-energy conditions in a fut
 
 | Var          | Type         | Value       |Required    | Title       |
 |--------------|--------------|-------------|-------------|-------------|
-| [min_temperature_threshold](defaults/main.yml#L7)   | int   | `3000`  |  True  |  Minimum temperature required for energy generation (in °K) |
-| [optimal_pressure_threshold](defaults/main.yml#L12)   | int   | `4500`  |  True  |  Target pressure for optimal energy generation (in Pa) |
-| [max_cooldown_rate](defaults/main.yml#L17)   | int   | `50`  |  True  |  Maximum cooldown rate allowable (°C/min) |
-| [coolant_level_threshold](defaults/main.yml#L25)   | int   | `30`  |  True  |  Default coolant level threshold (percentage) |
-| [pressure_safety_margin](defaults/main.yml#L30)   | int   | `200`  |  True  |  Safety margin for containment pressure (in Pa) |
-| [max_energy_storage](defaults/main.yml#L35)   | int   | `500`  |  False  |  Optimal energy storage capacity (in MW) |
-| [external_temp_check_interval](defaults/main.yml#L40)   | int   | `60`  |  False  |  External temperature check frequency (in seconds) |
-| [max_energy_output](defaults/main.yml#L45)   | int   | `450`  |  True  |  Maximum energy output for safe operation (in MW) |
-| [simulation_duration](defaults/main.yml#L53)   | int   | `300`  |  False  |  High-energy simulation duration (in seconds) |
-| [operation_modes](defaults/main.yml#L56)   | list   | `['Standard', 'High-Energy', 'Emergency Cooldown', 'Maintenance']`  |  n/a  |  n/a |
-| [coolant_types](defaults/main.yml#L62)   | list   | `['Water-based', 'Gel-based', 'Synthetic']`  |  n/a  |  n/a |
+| [min_temperature_threshold](defaults/main.yml#L7)   | int   | `3000` |    True  |  Minimum temperature required for energy generation (in °K) |
+| [optimal_pressure_threshold](defaults/main.yml#L12)   | int   | `4500` |    True  |  Target pressure for optimal energy generation (in Pa) |
+| [max_cooldown_rate](defaults/main.yml#L17)   | int   | `50` |    True  |  Maximum cooldown rate allowable (°C/min) |
+| [coolant_level_threshold](defaults/main.yml#L25)   | int   | `30` |    True  |  Default coolant level threshold (percentage) |
+| [pressure_safety_margin](defaults/main.yml#L30)   | int   | `200` |    True  |  Safety margin for containment pressure (in Pa) |
+| [max_energy_storage](defaults/main.yml#L35)   | int   | `500` |    False  |  Optimal energy storage capacity (in MW) |
+| [external_temp_check_interval](defaults/main.yml#L40)   | int   | `60` |    False  |  External temperature check frequency (in seconds) |
+| [max_energy_output](defaults/main.yml#L45)   | int   | `450` |    True  |  Maximum energy output for safe operation (in MW) |
+| [simulation_duration](defaults/main.yml#L53)   | int   | `300` |    False  |  High-energy simulation duration (in seconds) |
+| [operation_modes](defaults/main.yml#L56)   | list   | `['Standard', 'High-Energy', 'Emergency Cooldown', 'Maintenance']` |    n/a  |  n/a |
+| [coolant_types](defaults/main.yml#L62)   | list   | `['Water-based', 'Gel-based', 'Synthetic']` |    n/a  |  n/a |
 <details>
 <summary><b>🖇️ Full descriptions for vars in defaults/main.yml</b></summary>
 <br>
@@ -82,7 +82,6 @@ Longer durations may increase energy generation but risk overheating.<br>
 | Start ThermoCore diagnostics | ansible.builtin.debug | False | tasks file for thermo-core Initialize system and environment |
 | Check ambient environmental conditions | block | False |  |
 | Fetch ambient temperature and pressure | ansible.builtin.set_fact | False |  |
-| Verify ambient conditions for high-energy simulation | ansible.builtin.debug | True |  |
 | Configure ThermoCore for high-energy conditions | block | False | Initialize high-temperature and high-pressure simulation |
 | Set high temperature and pressure thresholds | ansible.builtin.set_fact | False |  |
 | Activate high-energy synthesis mode | ansible.builtin.debug | False |  |
@@ -133,9 +132,8 @@ classDef rescue stroke:#665352,stroke-width:2px;
   Start-->|Task| Start_ThermoCore_diagnostics0[start thermocore diagnostics]:::task
   Start_ThermoCore_diagnostics0-->|Block Start| Check_ambient_environmental_conditions1_block_start_0[[check ambient environmental conditions]]:::block
   Check_ambient_environmental_conditions1_block_start_0-->|Task| Fetch_ambient_temperature_and_pressure0[fetch ambient temperature and pressure]:::task
-  Fetch_ambient_temperature_and_pressure0-->|Task| Verify_ambient_conditions_for_high_energy_simulation1[verify ambient conditions for high energy<br>simulation<br>When: **ambient temperature   int   45  and  ambient<br>pressure   int   1000**]:::task
-  Verify_ambient_conditions_for_high_energy_simulation1-.->|End of Block| Check_ambient_environmental_conditions1_block_start_0
-  Verify_ambient_conditions_for_high_energy_simulation1-->|Rescue Start| Check_ambient_environmental_conditions1_rescue_start_0[check ambient environmental conditions]:::rescue
+  Fetch_ambient_temperature_and_pressure0-.->|End of Block| Check_ambient_environmental_conditions1_block_start_0
+  Fetch_ambient_temperature_and_pressure0-->|Rescue Start| Check_ambient_environmental_conditions1_rescue_start_0[check ambient environmental conditions]:::rescue
   Check_ambient_environmental_conditions1_rescue_start_0-->|Task| Handle_unfavorable_ambient_conditions0[handle unfavorable ambient conditions]:::task
   Handle_unfavorable_ambient_conditions0-.->|End of Rescue Block| Check_ambient_environmental_conditions1_block_start_0
   Handle_unfavorable_ambient_conditions0-->|Block Start| Configure_ThermoCore_for_high_energy_conditions2_block_start_0[[configure thermocore for high energy conditions]]:::block
