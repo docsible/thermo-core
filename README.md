@@ -80,7 +80,7 @@ Longer durations may increase energy generation but risk overheating.<br>
 | Name | Module | Has Conditions | Comments |
 | ---- | ------ | --------- |  -------- |
 | Start ThermoCore diagnostics | ansible.builtin.debug | False | tasks file for thermo-core Initialize system and environment |
-| Check ambient environmental conditions | block | False |  |
+| Check ambient environmental conditions test | block | False |  |
 | Fetch ambient temperature and pressure | ansible.builtin.set_fact | False |  |
 | Configure ThermoCore for high-energy conditions | block | False | Initialize high-temperature and high-pressure simulation |
 | Set high temperature and pressure thresholds | ansible.builtin.set_fact | False |  |
@@ -130,12 +130,12 @@ classDef includeVars stroke:#8e44ad,stroke-width:2px;
 classDef rescue stroke:#665352,stroke-width:2px;
 
   Start-->|Task| Start_ThermoCore_diagnostics0[start thermocore diagnostics]:::task
-  Start_ThermoCore_diagnostics0-->|Block Start| Check_ambient_environmental_conditions1_block_start_0[[check ambient environmental conditions]]:::block
-  Check_ambient_environmental_conditions1_block_start_0-->|Task| Fetch_ambient_temperature_and_pressure0[fetch ambient temperature and pressure]:::task
-  Fetch_ambient_temperature_and_pressure0-.->|End of Block| Check_ambient_environmental_conditions1_block_start_0
-  Fetch_ambient_temperature_and_pressure0-->|Rescue Start| Check_ambient_environmental_conditions1_rescue_start_0[check ambient environmental conditions]:::rescue
-  Check_ambient_environmental_conditions1_rescue_start_0-->|Task| Handle_unfavorable_ambient_conditions0[handle unfavorable ambient conditions]:::task
-  Handle_unfavorable_ambient_conditions0-.->|End of Rescue Block| Check_ambient_environmental_conditions1_block_start_0
+  Start_ThermoCore_diagnostics0-->|Block Start| Check_ambient_environmental_conditions_test1_block_start_0[[check ambient environmental conditions test]]:::block
+  Check_ambient_environmental_conditions_test1_block_start_0-->|Task| Fetch_ambient_temperature_and_pressure0[fetch ambient temperature and pressure]:::task
+  Fetch_ambient_temperature_and_pressure0-.->|End of Block| Check_ambient_environmental_conditions_test1_block_start_0
+  Fetch_ambient_temperature_and_pressure0-->|Rescue Start| Check_ambient_environmental_conditions_test1_rescue_start_0[check ambient environmental conditions test]:::rescue
+  Check_ambient_environmental_conditions_test1_rescue_start_0-->|Task| Handle_unfavorable_ambient_conditions0[handle unfavorable ambient conditions]:::task
+  Handle_unfavorable_ambient_conditions0-.->|End of Rescue Block| Check_ambient_environmental_conditions_test1_block_start_0
   Handle_unfavorable_ambient_conditions0-->|Block Start| Configure_ThermoCore_for_high_energy_conditions2_block_start_0[[configure thermocore for high energy conditions]]:::block
   Configure_ThermoCore_for_high_energy_conditions2_block_start_0-->|Task| Set_high_temperature_and_pressure_thresholds0[set high temperature and pressure thresholds]:::task
   Set_high_temperature_and_pressure_thresholds0-->|Task| Activate_high_energy_synthesis_mode1[activate high energy synthesis mode]:::task
