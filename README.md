@@ -29,7 +29,7 @@ Description: An advanced Ansible role simulating high-energy conditions in a fut
 
 | Var          | Type         | Value       |Required    | Title       |
 |--------------|--------------|-------------|-------------|-------------|
-| [min_temperature_threshold](defaults/main.yml#L7)   | int   | `3000` |    True  |  Minimum temperature required for energy generation (in °K) |
+| [min_temperature_threshold](defaults/main.yml#L7)   | int   | `4000` |    True  |  Minimum temperature required for energy generation (in °K) |
 | [optimal_pressure_threshold](defaults/main.yml#L12)   | int   | `4500` |    True  |  Target pressure for optimal energy generation (in Pa) |
 | [max_cooldown_rate](defaults/main.yml#L17)   | int   | `50` |    True  |  Maximum cooldown rate allowable (°C/min) |
 | [coolant_level_threshold](defaults/main.yml#L25)   | int   | `30` |    True  |  Default coolant level threshold (percentage) |
