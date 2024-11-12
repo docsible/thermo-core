@@ -6,7 +6,7 @@
   ansible.builtin.debug:
     msg: "Initializing ThermoCore diagnostics and energy synthesis procedures."
 
-- name: Check ambient environmental conditions
+- name: Check ambient environmental conditions test
   block:
     - name: Fetch ambient temperature and pressure
       ansible.builtin.set_fact:
