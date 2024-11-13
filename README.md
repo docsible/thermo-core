@@ -2,16 +2,19 @@
 
 # 📃 Role overview
 
-## test1
+## thermo-core
 
 
 
-Description: your role description
+Description: An advanced Ansible role simulating high-energy conditions in a futuristic ThermoCore system for adaptive energy generation and environmental resilience.
 
 
 | Field                | Value           |
 |--------------------- |-----------------|
-| Readme update        | 13/11/2024 |
+| Functional description | An advanced Ansible role simulating high-energy conditions in a futuristic ThermoCore system for adaptive energy generation and environmental resilience. |
+| Readme update        | 29/10/2024 |
+| Category             | demo |
+| Critical ⚠️          | high |
 
 
 
@@ -26,20 +29,41 @@ Description: your role description
 
 | Var          | Type         | Value       |Required    | Title       |
 |--------------|--------------|-------------|-------------|-------------|
-| [nodejs_setup_install_method](defaults/main.yml#L7)   | str   | `package` |    n/a  |  n/a |
-| [nodejs_setup_version](defaults/main.yml#L12)   | str   | `14.17.0` |    n/a  |  n/a |
-| [nodejs_setup_dev_path](defaults/main.yml#L17)   | str   | `/usr/local/nodejs` |    n/a  |  n/a |
-| [nodejs_setup_env_path](defaults/main.yml#L22)   | str   | `/opt/dev_nodejs` |    n/a  |  n/a |
+| [min_temperature_threshold](defaults/main.yml#L7)   | int   | `4000` |    True  |  Minimum temperature required for energy generation (in °K) |
+| [optimal_pressure_threshold](defaults/main.yml#L12)   | int   | `4500` |    True  |  Target pressure for optimal energy generation (in Pa) |
+| [max_cooldown_rate](defaults/main.yml#L17)   | int   | `50` |    True  |  Maximum cooldown rate allowable (°C/min) |
+| [coolant_level_threshold](defaults/main.yml#L25)   | int   | `30` |    True  |  Default coolant level threshold (percentage) |
+| [pressure_safety_margin](defaults/main.yml#L30)   | int   | `200` |    True  |  Safety margin for containment pressure (in Pa) |
+| [max_energy_storage](defaults/main.yml#L35)   | int   | `500` |    False  |  Optimal energy storage capacity (in MW) |
+| [external_temp_check_interval](defaults/main.yml#L40)   | int   | `60` |    False  |  External temperature check frequency (in seconds) |
+| [max_energy_output](defaults/main.yml#L45)   | int   | `450` |    True  |  Maximum energy output for safe operation (in MW) |
+| [simulation_duration](defaults/main.yml#L53)   | int   | `300` |    False  |  High-energy simulation duration (in seconds) |
+| [operation_modes](defaults/main.yml#L56)   | list   | `['Standard', 'High-Energy', 'Emergency Cooldown', 'Maintenance']` |    n/a  |  n/a |
+| [coolant_types](defaults/main.yml#L62)   | list   | `['Water-based', 'Gel-based', 'Synthetic']` |    n/a  |  n/a |
 <details>
 <summary><b>🖇️ Full descriptions for vars in defaults/main.yml</b></summary>
 <br>
-<b>nodejs_setup_install_method:</b> Méthode d'installation de Node.js, soit "package" pour utiliser le gestionnaire de paquets, soit "source" pour télécharger les sources
+<b>min_temperature_threshold:</b> The minimum core temperature required to initiate the energy synthesis process.
 <br>
-<b>nodejs_setup_version:</b> Version par défaut de Node.js à installer si l'installation se fait depuis les sources
+<b>optimal_pressure_threshold:</b> Optimal pressure setting for ThermoCore to maximize energy output under safe conditions.
 <br>
-<b>nodejs_setup_dev_path:</b> Chemin d'installation pour Node.js si l'installation se fait depuis les sources
+<b>max_cooldown_rate:</b> The rate at which ThermoCore can cool down without causing structural strain.
 <br>
-<b>nodejs_setup_env_path:</b> Chemin pour créer un dossier de développement Node.js
+<b>coolant_level_threshold:</b> This variable sets the minimum allowable coolant level for ThermoCore to function.<br>
+If coolant levels fall below this threshold, ThermoCore will initiate emergency coolant refill protocols.<br>
+This prevents overheating and maintains safe operational conditions.<br>
+<br>
+<b>pressure_safety_margin:</b> Buffer pressure level in containment to maintain system stability in fluctuating environments.
+<br>
+<b>max_energy_storage:</b> Maximum energy storage capacity of ThermoCore in megawatts. Exceeding this may result in overflow.
+<br>
+<b>external_temp_check_interval:</b> Frequency at which external temperature is checked to adjust ThermoCore energy generation.
+<br>
+<b>max_energy_output:</b> Sets the cap for energy output to avoid overloading ThermoCore or connected storage systems.
+<br>
+<b>simulation_duration:</b> Specifies the duration ThermoCore operates under high-energy conditions.<br>
+Shorter durations are safer but generate less energy.<br>
+Longer durations may increase energy generation but risk overheating.<br>
 <br>
 <br>
 </details>
@@ -55,17 +79,36 @@ Description: your role description
 
 | Name | Module | Has Conditions | Comments |
 | ---- | ------ | --------- |  -------- |
-| Installation de Node.js - choix de la méthode d'installation | block | False | tasks file for demo/roles/nodejs_setup |
-| Installer Node.js avec le gestionnaire de paquets | ansible.builtin.yum | True |  |
-| Installer les dépendances pour compiler Node.js à partir des sources | ansible.builtin.yum | True |  |
-| Télécharger les sources de Node.js | ansible.builtin.get_url | True |  |
-| Extraire les sources de Node.js | ansible.builtin.unarchive | True |  |
-| Compiler et installer Node.js à partir des sources | ansible.builtin.command | True |  |
-| Vérification de la disponibilité de Node.js | ansible.builtin.command | False |  |
-| Créer un dossier pour l'environnement de développement | ansible.builtin.file | False |  |
-| Vérifier si npm est installé | ansible.builtin.command | False |  |
-| Installer npm si nécessaire | ansible.builtin.command | True |  |
-| Vérification de l'installation de npm | ansible.builtin.command | False |  |
+| Start ThermoCore diagnostics | ansible.builtin.debug | False | tasks file for thermo-core Initialize system and environment |
+| Check ambient environmental conditions test | block | False |  |
+| Fetch ambient temperature and pressure | ansible.builtin.set_fact | False |  |
+| Configure ThermoCore for high-energy conditions | block | False | Initialize high-temperature and high-pressure simulation |
+| Set high temperature and pressure thresholds | ansible.builtin.set_fact | False |  |
+| Activate high-energy synthesis mode | ansible.builtin.debug | False |  |
+| Begin energy generation cycle | block | False | Simulate energy generation cycle |
+| Initialize energy storage capacitors | ansible.builtin.debug | False |  |
+| Simulate energy output based on temperature and pressure | ansible.builtin.set_fact | True |  |
+| Confirm energy generation success | ansible.builtin.debug | False |  |
+| Monitor for heat dissipation and coolant levels | block | False | Environmental monitoring and resource checks |
+| Measure coolant levels | ansible.builtin.set_fact | False |  |
+| Check if coolant levels are sufficient | ansible.builtin.debug | True |  |
+| Alert if coolant is low | ansible.builtin.debug | True |  |
+| Verify pressure containment integrity | block | False | Safety checks for pressure containment |
+| Check pressure containment status | ansible.builtin.set_fact | False |  |
+| Ensure containment for continued operation | ansible.builtin.debug | True |  |
+| Adaptive energy generation based on environmental feedback | block | False | Adjust energy generation based on environmental input |
+| Gather environmental feedback data | ansible.builtin.set_fact | False |  |
+| Adjust ThermoCore thresholds based on environment | ansible.builtin.debug | False |  |
+| Adaptive cycle based on operational data | block | False | Machine learning feedback for system optimization |
+| Integrate operational data into learning model | ansible.builtin.debug | False |  |
+| Adjust thresholds based on feedback loop | ansible.builtin.debug | True |  |
+| Perform end-of-cycle diagnostics | block | False | Final cycle diagnostics |
+| Check all system metrics post-energy generation | ansible.builtin.debug | False |  |
+| Review energy efficiency metrics | ansible.builtin.debug | False |  |
+| Begin ThermoCore shutdown | ansible.builtin.debug | False | Shutdown and cooling procedures |
+| Run cooldown diagnostics | block | False |  |
+| Monitor system cooldown rates | ansible.builtin.set_fact | False |  |
+| Confirm cooldown success | ansible.builtin.debug | True |  |
 
 
 ## Task Flow Graphs
@@ -86,27 +129,94 @@ classDef importRole stroke:#699ba7,stroke-width:2px;
 classDef includeVars stroke:#8e44ad,stroke-width:2px;
 classDef rescue stroke:#665352,stroke-width:2px;
 
-  Start-->|Block Start| Installation_de_Node_js___choix_de_la_méthode_d_installation0_block_start_0[[installation de node js   choix de la méthode d<br>installation]]:::block
-  Installation_de_Node_js___choix_de_la_méthode_d_installation0_block_start_0-->|Task| Installer_Node_js_avec_le_gestionnaire_de_paquets0[installer node js avec le gestionnaire de paquets<br>When: **nodejs setup install method     package**]:::task
-  Installer_Node_js_avec_le_gestionnaire_de_paquets0-->|Task| Installer_les_dépendances_pour_compiler_Node_js_à_partir_des_sources1[installer les dépendances pour compiler node js à<br>partir des sources<br>When: **nodejs setup install method     source**]:::task
-  Installer_les_dépendances_pour_compiler_Node_js_à_partir_des_sources1-->|Task| Télécharger_les_sources_de_Node_js2[télécharger les sources de node js<br>When: **nodejs setup install method     source**]:::task
-  Télécharger_les_sources_de_Node_js2-->|Task| Extraire_les_sources_de_Node_js3[extraire les sources de node js<br>When: **nodejs setup install method     source**]:::task
-  Extraire_les_sources_de_Node_js3-->|Task| Compiler_et_installer_Node_js_à_partir_des_sources4[compiler et installer node js à partir des sources<br>When: **nodejs setup install method     source**]:::task
-  Compiler_et_installer_Node_js_à_partir_des_sources4-.->|End of Block| Installation_de_Node_js___choix_de_la_méthode_d_installation0_block_start_0
-  Compiler_et_installer_Node_js_à_partir_des_sources4-->|Task| Vérification_de_la_disponibilité_de_Node_js1[vérification de la disponibilité de node js]:::task
-  Vérification_de_la_disponibilité_de_Node_js1-->|Task| Créer_un_dossier_pour_l_environnement_de_développement2[créer un dossier pour l environnement de<br>développement]:::task
-  Créer_un_dossier_pour_l_environnement_de_développement2-->|Task| Vérifier_si_npm_est_installé3[vérifier si npm est installé]:::task
-  Vérifier_si_npm_est_installé3-->|Task| Installer_npm_si_nécessaire4[installer npm si nécessaire<br>When: **npm check rc    0**]:::task
-  Installer_npm_si_nécessaire4-->|Task| Vérification_de_l_installation_de_npm5[vérification de l installation de npm]:::task
-  Vérification_de_l_installation_de_npm5-->End
+  Start-->|Task| Start_ThermoCore_diagnostics0[start thermocore diagnostics]:::task
+  Start_ThermoCore_diagnostics0-->|Block Start| Check_ambient_environmental_conditions_test1_block_start_0[[check ambient environmental conditions test]]:::block
+  Check_ambient_environmental_conditions_test1_block_start_0-->|Task| Fetch_ambient_temperature_and_pressure0[fetch ambient temperature and pressure]:::task
+  Fetch_ambient_temperature_and_pressure0-.->|End of Block| Check_ambient_environmental_conditions_test1_block_start_0
+  Fetch_ambient_temperature_and_pressure0-->|Rescue Start| Check_ambient_environmental_conditions_test1_rescue_start_0[check ambient environmental conditions test]:::rescue
+  Check_ambient_environmental_conditions_test1_rescue_start_0-->|Task| Handle_unfavorable_ambient_conditions0[handle unfavorable ambient conditions]:::task
+  Handle_unfavorable_ambient_conditions0-.->|End of Rescue Block| Check_ambient_environmental_conditions_test1_block_start_0
+  Handle_unfavorable_ambient_conditions0-->|Block Start| Configure_ThermoCore_for_high_energy_conditions2_block_start_0[[configure thermocore for high energy conditions]]:::block
+  Configure_ThermoCore_for_high_energy_conditions2_block_start_0-->|Task| Set_high_temperature_and_pressure_thresholds0[set high temperature and pressure thresholds]:::task
+  Set_high_temperature_and_pressure_thresholds0-->|Task| Activate_high_energy_synthesis_mode1[activate high energy synthesis mode]:::task
+  Activate_high_energy_synthesis_mode1-.->|End of Block| Configure_ThermoCore_for_high_energy_conditions2_block_start_0
+  Activate_high_energy_synthesis_mode1-->|Rescue Start| Configure_ThermoCore_for_high_energy_conditions2_rescue_start_0[configure thermocore for high energy conditions]:::rescue
+  Configure_ThermoCore_for_high_energy_conditions2_rescue_start_0-->|Task| Handle_ThermoCore_setup_failure0[handle thermocore setup failure]:::task
+  Handle_ThermoCore_setup_failure0-.->|End of Rescue Block| Configure_ThermoCore_for_high_energy_conditions2_block_start_0
+  Handle_ThermoCore_setup_failure0-->|Block Start| Begin_energy_generation_cycle3_block_start_0[[begin energy generation cycle]]:::block
+  Begin_energy_generation_cycle3_block_start_0-->|Task| Initialize_energy_storage_capacitors0[initialize energy storage capacitors]:::task
+  Initialize_energy_storage_capacitors0-->|Task| Simulate_energy_output_based_on_temperature_and_pressure1[simulate energy output based on temperature and<br>pressure<br>When: **target temperature   int   min temperature<br>threshold and target pressure   int   optimal<br>pressure threshold**]:::task
+  Simulate_energy_output_based_on_temperature_and_pressure1-->|Task| Confirm_energy_generation_success2[confirm energy generation success]:::task
+  Confirm_energy_generation_success2-.->|End of Block| Begin_energy_generation_cycle3_block_start_0
+  Confirm_energy_generation_success2-->|Rescue Start| Begin_energy_generation_cycle3_rescue_start_0[begin energy generation cycle]:::rescue
+  Begin_energy_generation_cycle3_rescue_start_0-->|Task| Handle_energy_generation_failure0[handle energy generation failure]:::task
+  Handle_energy_generation_failure0-.->|End of Rescue Block| Begin_energy_generation_cycle3_block_start_0
+  Handle_energy_generation_failure0-->|Block Start| Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0[[monitor for heat dissipation and coolant levels]]:::block
+  Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0-->|Task| Measure_coolant_levels0[measure coolant levels]:::task
+  Measure_coolant_levels0-->|Task| Check_if_coolant_levels_are_sufficient1[check if coolant levels are sufficient<br>When: **coolant level   int    coolant level threshold**]:::task
+  Check_if_coolant_levels_are_sufficient1-->|Task| Alert_if_coolant_is_low2[alert if coolant is low<br>When: **coolant level   int   coolant level threshold**]:::task
+  Alert_if_coolant_is_low2-.->|End of Block| Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0
+  Alert_if_coolant_is_low2-->|Rescue Start| Monitor_for_heat_dissipation_and_coolant_levels4_rescue_start_0[monitor for heat dissipation and coolant levels]:::rescue
+  Monitor_for_heat_dissipation_and_coolant_levels4_rescue_start_0-->|Task| Activate_emergency_coolant_system0[activate emergency coolant system]:::task
+  Activate_emergency_coolant_system0-.->|End of Rescue Block| Monitor_for_heat_dissipation_and_coolant_levels4_block_start_0
+  Activate_emergency_coolant_system0-->|Block Start| Verify_pressure_containment_integrity5_block_start_0[[verify pressure containment integrity]]:::block
+  Verify_pressure_containment_integrity5_block_start_0-->|Task| Check_pressure_containment_status0[check pressure containment status]:::task
+  Check_pressure_containment_status0-->|Task| Ensure_containment_for_continued_operation1[ensure containment for continued operation<br>When: **containment integrity     intact**]:::task
+  Ensure_containment_for_continued_operation1-.->|End of Block| Verify_pressure_containment_integrity5_block_start_0
+  Ensure_containment_for_continued_operation1-->|Rescue Start| Verify_pressure_containment_integrity5_rescue_start_0[verify pressure containment integrity]:::rescue
+  Verify_pressure_containment_integrity5_rescue_start_0-->|Task| Engage_containment_failure_protocols0[engage containment failure protocols]:::task
+  Engage_containment_failure_protocols0-.->|End of Rescue Block| Verify_pressure_containment_integrity5_block_start_0
+  Engage_containment_failure_protocols0-->|Block Start| Adaptive_energy_generation_based_on_environmental_feedback6_block_start_0[[adaptive energy generation based on environmental<br>feedback]]:::block
+  Adaptive_energy_generation_based_on_environmental_feedback6_block_start_0-->|Task| Gather_environmental_feedback_data0[gather environmental feedback data]:::task
+  Gather_environmental_feedback_data0-->|Task| Adjust_ThermoCore_thresholds_based_on_environment1[adjust thermocore thresholds based on environment]:::task
+  Adjust_ThermoCore_thresholds_based_on_environment1-.->|End of Block| Adaptive_energy_generation_based_on_environmental_feedback6_block_start_0
+  Adjust_ThermoCore_thresholds_based_on_environment1-->|Rescue Start| Adaptive_energy_generation_based_on_environmental_feedback6_rescue_start_0[adaptive energy generation based on environmental<br>feedback]:::rescue
+  Adaptive_energy_generation_based_on_environmental_feedback6_rescue_start_0-->|Task| Handle_external_data_retrieval_failure0[handle external data retrieval failure]:::task
+  Handle_external_data_retrieval_failure0-.->|End of Rescue Block| Adaptive_energy_generation_based_on_environmental_feedback6_block_start_0
+  Handle_external_data_retrieval_failure0-->|Block Start| Adaptive_cycle_based_on_operational_data7_block_start_0[[adaptive cycle based on operational data]]:::block
+  Adaptive_cycle_based_on_operational_data7_block_start_0-->|Task| Integrate_operational_data_into_learning_model0[integrate operational data into learning model]:::task
+  Integrate_operational_data_into_learning_model0-->|Task| Adjust_thresholds_based_on_feedback_loop1[adjust thresholds based on feedback loop<br>When: **learning model ready   default false**]:::task
+  Adjust_thresholds_based_on_feedback_loop1-.->|End of Block| Adaptive_cycle_based_on_operational_data7_block_start_0
+  Adjust_thresholds_based_on_feedback_loop1-->|Rescue Start| Adaptive_cycle_based_on_operational_data7_rescue_start_0[adaptive cycle based on operational data]:::rescue
+  Adaptive_cycle_based_on_operational_data7_rescue_start_0-->|Task| Manage_learning_model_integration_failure0[manage learning model integration failure]:::task
+  Manage_learning_model_integration_failure0-.->|End of Rescue Block| Adaptive_cycle_based_on_operational_data7_block_start_0
+  Manage_learning_model_integration_failure0-->|Block Start| Perform_end_of_cycle_diagnostics8_block_start_0[[perform end of cycle diagnostics]]:::block
+  Perform_end_of_cycle_diagnostics8_block_start_0-->|Task| Check_all_system_metrics_post_energy_generation0[check all system metrics post energy generation]:::task
+  Check_all_system_metrics_post_energy_generation0-->|Task| Review_energy_efficiency_metrics1[review energy efficiency metrics]:::task
+  Review_energy_efficiency_metrics1-.->|End of Block| Perform_end_of_cycle_diagnostics8_block_start_0
+  Review_energy_efficiency_metrics1-->|Rescue Start| Perform_end_of_cycle_diagnostics8_rescue_start_0[perform end of cycle diagnostics]:::rescue
+  Perform_end_of_cycle_diagnostics8_rescue_start_0-->|Task| Handle_diagnostics_failure0[handle diagnostics failure]:::task
+  Handle_diagnostics_failure0-.->|End of Rescue Block| Perform_end_of_cycle_diagnostics8_block_start_0
+  Handle_diagnostics_failure0-->|Task| Begin_ThermoCore_shutdown9[begin thermocore shutdown]:::task
+  Begin_ThermoCore_shutdown9-->|Block Start| Run_cooldown_diagnostics10_block_start_0[[run cooldown diagnostics]]:::block
+  Run_cooldown_diagnostics10_block_start_0-->|Task| Monitor_system_cooldown_rates0[monitor system cooldown rates]:::task
+  Monitor_system_cooldown_rates0-->|Task| Confirm_cooldown_success1[confirm cooldown success<br>When: **cooldown rate     nominal**]:::task
+  Confirm_cooldown_success1-.->|End of Block| Run_cooldown_diagnostics10_block_start_0
+  Confirm_cooldown_success1-->|Rescue Start| Run_cooldown_diagnostics10_rescue_start_0[run cooldown diagnostics]:::rescue
+  Run_cooldown_diagnostics10_rescue_start_0-->|Task| Emergency_cooldown_protocol0[emergency cooldown protocol]:::task
+  Emergency_cooldown_protocol0-.->|End of Rescue Block| Run_cooldown_diagnostics10_block_start_0
+  Emergency_cooldown_protocol0-->End
 ```
 
 
+## Playbook
 
+```yml
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - thermo-core
 
+```
+## Playbook graph
+```mermaid
+flowchart TD
+  localhost-->|Role| thermo_core[thermo core]
+```
 
 ## Author Information
-your name
+Lucian BLETAN
 
 #### License
 
