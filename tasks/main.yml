@@ -34,25 +34,6 @@
       ansible.builtin.debug:
         msg: "Failed to set high-energy thresholds, reverting to safe mode."
 
-# Simulate energy generation cycle
-- name: Begin energy generation cycle
-  block:
-    - name: Initialize energy storage capacitors
-      ansible.builtin.debug:
-        msg: "Energy storage capacitors initialized for thermal energy absorption."
-
-    - name: Simulate energy output based on temperature and pressure
-      ansible.builtin.set_fact:
-        generated_energy: "{{ target_temperature * target_pressure / 1000000 }}"  # Simplified energy calculation
-      when: target_temperature | int > min_temperature_threshold and target_pressure | int > optimal_pressure_threshold
-
-    - name: Confirm energy generation success
-      ansible.builtin.debug:
-        msg: "Generated {{ generated_energy }}MW of energy under current conditions."
-  rescue:
-    - name: Handle energy generation failure
-      ansible.builtin.debug:
-        msg: "ThermoCore energy generation failed. Lowering thresholds and recalibrating."
 
 # Environmental monitoring and resource checks
 - name: Monitor for heat dissipation and coolant levels
