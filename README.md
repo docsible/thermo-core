@@ -21,6 +21,8 @@ Description: An advanced Ansible role simulating high-energy conditions in a fut
 
 
 
+
+
 ### Defaults
 
 **These are static variables with lower priority**
@@ -38,8 +40,8 @@ Description: An advanced Ansible role simulating high-energy conditions in a fut
 | [external_temp_check_interval](defaults/main.yml#L40)   | int   | `60` |    False  |  External temperature check frequency (in seconds) |
 | [max_energy_output](defaults/main.yml#L45)   | int   | `450` |    True  |  Maximum energy output for safe operation (in MW) |
 | [simulation_duration](defaults/main.yml#L53)   | int   | `300` |    False  |  High-energy simulation duration (in seconds) |
-| [operation_modes](defaults/main.yml#L56)   | list   | `['Standard', 'High-Energy', 'Emergency Cooldown', 'Maintenance']` |    n/a  |  n/a |
-| [coolant_types](defaults/main.yml#L62)   | list   | `['Water-based', 'Gel-based', 'Synthetic']` |    n/a  |  n/a |
+| [operation_modes](defaults/main.yml#L56)   | list   | `['Standard', 'High-Energy', 'Emergency Cooldown', 'Maintenance']` |    None  |  None |
+| [coolant_types](defaults/main.yml#L62)   | list   | `['Water-based', 'Gel-based', 'Synthetic']` |    None  |  None |
 <details>
 <summary><b>🖇️ Full descriptions for vars in defaults/main.yml</b></summary>
 <br>
@@ -191,7 +193,8 @@ classDef rescue stroke:#665352,stroke-width:2px;
 
 ```yml
 ---
-- hosts: localhost
+- name: Test playbook
+  hosts: localhost
   remote_user: root
   roles:
     - thermo-core
@@ -217,4 +220,8 @@ license (GPL-2.0-or-later, MIT, etc)
 #### Platforms
 
 No platforms specified.
+
+#### Dependencies
+
+No dependencies specified.
 <!-- DOCSIBLE END -->
