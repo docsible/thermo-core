@@ -30,43 +30,44 @@ Description: An advanced Ansible role simulating high-energy conditions in a fut
 #### File: defaults/main.yml
 
 | Var          | Type         | Value       |Required    | Title       |
-|--------------|--------------|-------------|-------------|-------------|
-| [min_temperature_threshold](defaults/main.yml#L7)   | int   | `4000` |    True  |  Minimum temperature required for energy generation (in °K) |
-| [optimal_pressure_threshold](defaults/main.yml#L12)   | int   | `4500` |    True  |  Target pressure for optimal energy generation (in Pa) |
-| [max_cooldown_rate](defaults/main.yml#L17)   | int   | `50` |    True  |  Maximum cooldown rate allowable (°C/min) |
-| [coolant_level_threshold](defaults/main.yml#L25)   | int   | `30` |    True  |  Default coolant level threshold (percentage) |
-| [pressure_safety_margin](defaults/main.yml#L30)   | int   | `200` |    True  |  Safety margin for containment pressure (in Pa) |
-| [max_energy_storage](defaults/main.yml#L35)   | int   | `500` |    False  |  Optimal energy storage capacity (in MW) |
-| [external_temp_check_interval](defaults/main.yml#L40)   | int   | `60` |    False  |  External temperature check frequency (in seconds) |
-| [max_energy_output](defaults/main.yml#L45)   | int   | `450` |    True  |  Maximum energy output for safe operation (in MW) |
-| [simulation_duration](defaults/main.yml#L53)   | int   | `300` |    False  |  High-energy simulation duration (in seconds) |
-| [operation_modes](defaults/main.yml#L56)   | list   | `['Standard', 'High-Energy', 'Emergency Cooldown', 'Maintenance']` |    None  |  None |
-| [coolant_types](defaults/main.yml#L62)   | list   | `['Water-based', 'Gel-based', 'Synthetic']` |    None  |  None |
+|--------------|--------------|-------------|------------|-------------|
+| [min_temperature_threshold](defaults/main.yml#L7)   | int | `4000` |    True  |  Minimum temperature required for energy generation (in °K) |
+| [optimal_pressure_threshold](defaults/main.yml#L12)   | int | `4500` |    True  |  Target pressure for optimal energy generation (in Pa) |
+| [max_cooldown_rate](defaults/main.yml#L17)   | int | `50` |    True  |  Maximum cooldown rate allowable (°C/min) |
+| [coolant_level_threshold](defaults/main.yml#L25)   | int | `30` |    True  |  Default coolant level threshold (percentage) |
+| [pressure_safety_margin](defaults/main.yml#L30)   | int | `200` |    True  |  Safety margin for containment pressure (in Pa) |
+| [max_energy_storage](defaults/main.yml#L35)   | int | `500` |    False  |  Optimal energy storage capacity (in MW) |
+| [external_temp_check_interval](defaults/main.yml#L40)   | int | `60` |    False  |  External temperature check frequency (in seconds) |
+| [max_energy_output](defaults/main.yml#L45)   | int | `450` |    True  |  Maximum energy output for safe operation (in MW) |
+| [simulation_duration](defaults/main.yml#L53)   | int | `300` |    False  |  High-energy simulation duration (in seconds) |
+| [operation_modes](defaults/main.yml#L56)   | list | `[]` |    None  |  None |
+| [operation_modes.**0**](defaults/main.yml#L57)   | str | `Standard` |    None  |  None |
+| [operation_modes.**1**](defaults/main.yml#L58)   | str | `High-Energy` |    None  |  None |
+| [operation_modes.**2**](defaults/main.yml#L59)   | str | `Emergency Cooldown` |    None  |  None |
+| [operation_modes.**3**](defaults/main.yml#L60)   | str | `Maintenance` |    None  |  None |
+| [coolant_types](defaults/main.yml#L62)   | list | `[]` |    None  |  None |
+| [coolant_types.**0**](defaults/main.yml#L63)   | str | `Water-based` |    None  |  None |
+| [coolant_types.**1**](defaults/main.yml#L64)   | str | `Gel-based` |    None  |  None |
+| [coolant_types.**2**](defaults/main.yml#L65)   | str | `Synthetic` |    None  |  None |
 <details>
 <summary><b>🖇️ Full descriptions for vars in defaults/main.yml</b></summary>
 <br>
-<b>min_temperature_threshold:</b> The minimum core temperature required to initiate the energy synthesis process.
-<br>
-<b>optimal_pressure_threshold:</b> Optimal pressure setting for ThermoCore to maximize energy output under safe conditions.
-<br>
-<b>max_cooldown_rate:</b> The rate at which ThermoCore can cool down without causing structural strain.
-<br>
-<b>coolant_level_threshold:</b> This variable sets the minimum allowable coolant level for ThermoCore to function.<br>
+<table>
+<th>Var</th><th>Description</th>
+<tr><td><b>min_temperature_threshold</b></td><td>The minimum core temperature required to initiate the energy synthesis process.</td></tr>
+<tr><td><b>optimal_pressure_threshold</b></td><td>Optimal pressure setting for ThermoCore to maximize energy output under safe conditions.</td></tr>
+<tr><td><b>max_cooldown_rate</b></td><td>The rate at which ThermoCore can cool down without causing structural strain.</td></tr>
+<tr><td><b>coolant_level_threshold</b></td><td>This variable sets the minimum allowable coolant level for ThermoCore to function.<br>
 If coolant levels fall below this threshold, ThermoCore will initiate emergency coolant refill protocols.<br>
-This prevents overheating and maintains safe operational conditions.<br>
-<br>
-<b>pressure_safety_margin:</b> Buffer pressure level in containment to maintain system stability in fluctuating environments.
-<br>
-<b>max_energy_storage:</b> Maximum energy storage capacity of ThermoCore in megawatts. Exceeding this may result in overflow.
-<br>
-<b>external_temp_check_interval:</b> Frequency at which external temperature is checked to adjust ThermoCore energy generation.
-<br>
-<b>max_energy_output:</b> Sets the cap for energy output to avoid overloading ThermoCore or connected storage systems.
-<br>
-<b>simulation_duration:</b> Specifies the duration ThermoCore operates under high-energy conditions.<br>
+This prevents overheating and maintains safe operational conditions.<br></td></tr>
+<tr><td><b>pressure_safety_margin</b></td><td>Buffer pressure level in containment to maintain system stability in fluctuating environments.</td></tr>
+<tr><td><b>max_energy_storage</b></td><td>Maximum energy storage capacity of ThermoCore in megawatts. Exceeding this may result in overflow.</td></tr>
+<tr><td><b>external_temp_check_interval</b></td><td>Frequency at which external temperature is checked to adjust ThermoCore energy generation.</td></tr>
+<tr><td><b>max_energy_output</b></td><td>Sets the cap for energy output to avoid overloading ThermoCore or connected storage systems.</td></tr>
+<tr><td><b>simulation_duration</b></td><td>Specifies the duration ThermoCore operates under high-energy conditions.<br>
 Shorter durations are safer but generate less energy.<br>
-Longer durations may increase energy generation but risk overheating.<br>
-<br>
+Longer durations may increase energy generation but risk overheating.<br></td></tr>
+</table>
 <br>
 </details>
 
@@ -80,7 +81,7 @@ Longer durations may increase energy generation but risk overheating.<br>
 #### File: tasks/main.yml
 
 | Name | Module | Has Conditions | Comments |
-| ---- | ------ | --------- |  -------- |
+| ---- | ------ | -------------- | -------- |
 | Start ThermoCore diagnostics | ansible.builtin.debug | False | tasks file for thermo-core Initialize system and environment |
 | Check ambient environmental conditions test | block | False |  |
 | Fetch ambient temperature and pressure | ansible.builtin.set_fact | False |  |
